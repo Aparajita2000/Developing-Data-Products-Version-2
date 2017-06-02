@@ -39,4 +39,4 @@ Viewing the Data
 There is a pin on the map for each data point
 - The size of the circle indicates the victim count
 - The pin is the average of the zip codes for that county
-- The pin has a hover which will display the COunty/State & Victim Count
+- The pin has a hover which will display the county/state & victim count
