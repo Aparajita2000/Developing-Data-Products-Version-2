@@ -1,31 +1,19 @@
 library(dplyr)
 
-LatLng <- read.csv("./data/LatLng.csv")
+latlng <- read.csv("./data/LatLng.csv")
 murderTotals <- read.csv("./data/MurderTotals.csv")
 
-byYear <- aggregate(Victim.Count ~ Year,murderTotals,sum)
-byCity <- aggregate(Victim.Count ~ City+State,murderTotals,sum)
+#byYear <- aggregate(Victim.Count ~ Year,murderTotals,sum)
+#byCity <- aggregate(Victim.Count ~ City+State,murderTotals,sum)
 
-murderLocation <- merge(byCity,latlng,by=c("City","State"),all.x = TRUE)
+#murderLocation <- merge(byCity,latlng,by=c("City","State"),all.x = TRUE)
 
-allzips <- readRDS("data/superzip.rds")
-allzips$latitude <- jitter(allzips$latitude)
-allzips$longitude <- jitter(allzips$longitude)
-allzips$college <- allzips$college * 100
-allzips$zipcode <- formatC(allzips$zipcode, width=5, format="d", flag="0")
-row.names(allzips) <- allzips$zipcode
-
-cleantable <- allzips %>%
-  select(
-    City = city.x,
-    State = state.x,
-    Zipcode = zipcode,
-    Rank = rank,
-    Score = centile,
-    Superzip = superzip,
-    Population = adultpop,
-    College = college,
-    Income = income,
-    Lat = latitude,
-    Long = longitude
-  )
+#byYear <- aggregate(Victim.Count ~ Year,murderTotals,sum)
+#byCity <- aggregate(Victim.Count ~ City+State,murderTotals,sum)
+#write.csv(murderTotals,file="./data/MurderTotals.csv",row.names =  FALSE, quote = TRUE)
+#write.csv(latlng,file="./data/LatLng.csv",row.names =  FALSE, quote = TRUE)
+#murderLocation <- merge(byCity,latlng,by=c("City","State"),all.x = TRUE)
+#murderLocTotals <- aggregate(Victim.Count ~ City+State+lat+lng,murderLocation,sum)
+#plotdata <- tail(murderLocTotals[with(murderLocTotals, order(Victim.Count)),],500)
+#plotdata$title <- paste(plotdata$City,'(',plotdata$State,') - ',plotdata$Victim.Count)
+#murderLocation[is.na(murderLocation$lat),]

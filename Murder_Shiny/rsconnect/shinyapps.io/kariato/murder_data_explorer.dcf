@@ -1,0 +1,11 @@
+name: murder_data_explorer
+title: Murder Data Explorer
+account: kariato
+server: shinyapps.io
+appId: 185843
+bundleId: 851102
+url: https://kariato.shinyapps.io/murder_data_explorer/
+when: 1496434538.49435
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|Developing Data Products Week4.Rmd|Developing_Data_Products_Week4.knit.md|Developing_Data_Products_Week4.Rmd|Developing_Data_Products_Week4.utf8.md|Developing_Data_Products_Week4a.html|x.r.md|data/-revisedmurrayfile_111952895138.xls|data/deps.sh

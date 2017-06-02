@@ -97,16 +97,16 @@ summarise(lat = mean(Latitude,na.rm =TRUE),lng = mean(Longitude,na.rm =TRUE))
 colnames(latlong2)[1] <- "City"
 latlng <- rbind(latlong,latlong2)
 latlng <- latlng[!duplicated(latlng[,c("City","State")]),]
-byYear <- aggregate(Victim.Count ~ Year,murderTotals,sum)
-byCity <- aggregate(Victim.Count ~ City+State,murderTotals,sum)
 write.csv(murderTotals,file="./data/MurderTotals.csv",row.names =  FALSE, quote = TRUE)
 write.csv(latlng,file="./data/LatLng.csv",row.names =  FALSE, quote = TRUE)
-#murderLocation <- merge(byCity,latlng,by=c("City","State"),all.x = TRUE)
-#murderLocTotals <- aggregate(Victim.Count ~ City+State,murderLocation,sum)
+byYear <- aggregate(Victim.Count ~ Year,murderTotals,sum)
+byCity <- aggregate(Victim.Count ~ City+State,murderTotals,sum)
+murderLocation <- merge(byCity,latlng,by=c("City","State"),all.x = TRUE)
+murderLocTotals <- aggregate(Victim.Count ~ City+State+lat+lng,murderLocation,sum)
+plotdata <- tail(murderLocTotals[with(murderLocTotals, order(Victim.Count)),],500)
+plotdata$title <- paste(plotdata$City,'(',plotdata$State,') - ',plotdata$Victim.Count)
 #murderLocation[is.na(murderLocation$lat),]
-# murderTotals <- murderTotals[murderTotals$Year > 1990,]
-# murderTotals <- murderTotals[murderTotals$Year < 1995,]
-# murderTotals <- murderTotals[murderTotals$State=="AZ" ,]
+
 # View(murderTotals)
 #murderLocation[is.na(murderLocation$lat),]
 # Make state borders white
@@ -115,11 +115,11 @@ write.csv(latlng,file="./data/LatLng.csv",row.names =  FALSE, quote = TRUE)
 ## Plot Murders
 
 ```{r}
-#murderLocTotals %>%  
-#  leaflet() %>%
-#  addTiles() %>%
-#  addMarkers(label=murderLocation$City) %>%
-#  addCircles(weight = 1, radius = sqrt(murderLocation$Victim.Count) * 500)
+ plotdata %>%  
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(label=plotdata$title) %>%
+  addCircles(weight = 1, radius = sqrt(plotdata$Victim.Count) * 500)
 
 ```
 
